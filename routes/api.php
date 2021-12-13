@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\EmailController;
 use App\Http\Controllers\Api\SitesController;
+use App\Http\Controllers\Api\TemplatesController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::get('emails/plans', [EmailController::class, 'plan'])->name('email.plans');
+    Route::get('templates', [TemplatesController::class, 'index'])->name('templates');
     Route::resource('emails', EmailController::class);    
     Route::resource('sites', SitesController::class);
     Route::resource('user', UserController::class);
