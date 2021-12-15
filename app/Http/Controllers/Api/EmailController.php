@@ -92,7 +92,7 @@ class EmailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $email)
+    public function show(Request $request)
     {
         $user = User::where('token', $request->token)->with('site')->first();
 
@@ -100,7 +100,7 @@ class EmailController extends Controller
         $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
         $umblerApi->setDomain($user->site->domain);
 
-        $email = $umblerApi->getEmailAccount($email);
+        $email = $umblerApi->getEmailAccount($request->email);
 
         return response()->json($email);
     }
@@ -147,7 +147,7 @@ class EmailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $email)
+    public function destroy(Request $request)
     {
         $user = User::where('token', $request->token)->with('site')->first();
 
@@ -155,7 +155,8 @@ class EmailController extends Controller
         $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
         $umblerApi->setDomain($user->site->domain);
 
-        $response = $umblerApi->deleteEmailAccount($email);
+        $response = $umblerApi->deleteEmailAccount($request->email);
+
         return response()->json(['email' => $response]);
     }
 

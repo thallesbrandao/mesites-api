@@ -26,7 +26,13 @@ Route::prefix('v1')->group(function () {
     Route::get('emails/{token}/plans', [EmailController::class, 'plan'])->name('email.plans');
     Route::get('templates/{token}', [TemplatesController::class, 'index'])->name('templates');
     Route::put('templates/{token}', [TemplatesController::class, 'update'])->name('templates.update');
-    Route::resource('emails/{token}/', EmailController::class);    
+
+    Route::get('emails/{token}/{email}', [EmailController::class, 'show'])->name('email.show');
+    Route::get('emails/{token}', [EmailController::class, 'index'])->name('email.index');
+    Route::post('emails/{token}', [EmailController::class, 'store'])->name('email.store');
+    Route::put('emails/{token}/{email}', [EmailController::class, 'update'])->name('email.update');
+    Route::delete('emails/{token}/deletar/{email}', [EmailController::class, 'destroy'])->name('email.destroy');
+
     Route::resource('sites', SitesController::class);
     Route::resource('user', UserController::class);
 });
