@@ -35,6 +35,10 @@ class UserController extends Controller
             'token' => $token,
         ]);
 
+        $user->site()->create([
+            'http' => 'http'
+        ]);
+
         $token = $user->createToken($token);
 
         return response()->json([

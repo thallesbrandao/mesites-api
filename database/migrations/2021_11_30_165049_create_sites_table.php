@@ -17,10 +17,17 @@ class CreateSitesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('domain')->unique()->nullable();
+            $table->boolean('emails')->default(1);
+            $table->enum('http', ['http://', 'https://']);
             $table->string('ftp')->nullable();
             $table->string('ftpUser')->nullable();
             $table->string('ftpPass')->nullable();
             $table->string('ftpDir')->nullable();
+            $table->string('preview')->nullable();
+            $table->string('config_logo')->nullable();
+            $table->string('config_name')->nullable();
+            $table->string('config_email')->nullable();
+            $table->text('config_description')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -74,7 +74,13 @@ class SitesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $site = Sites::where('id', $id)->firstOrFail();
+        $site->preview = $request->preview;
+        $site->save();
+
+        return response()->json([
+            'site' => $site
+        ]);
     }
 
     /**

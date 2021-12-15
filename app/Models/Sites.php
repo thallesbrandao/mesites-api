@@ -10,9 +10,16 @@ class Sites extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'user_id',
+        'domain',
+        'ftp',
+        'ftpUser',
+        'ftpPass',
+        'ftpDir',
+        'preview',
+        'config_name',
+        'config_email',
+        'config_description',
     ];
     
 }

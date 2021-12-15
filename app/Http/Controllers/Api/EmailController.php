@@ -3,32 +3,34 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Umbler\Umbler;
 
 class EmailController extends Controller
 {
 
-    private $umblerApi;
-
-    public function __construct()
-    {
-        $this->umblerApi = new Umbler;
-        // $this->umblerApi->debug = true; 
-        $this->umblerApi->setCredentials('61a4e1647b3b5018ecb3d395', 'fb626024a8b341289fd2ba5f7b4db2eb');
-        $this->umblerApi->setDomain('espacocabine.com.br');
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $emails = $this->umblerApi->getEmailAccounts();
+        $user = User::where('token', $request->token)->with('site')->first();
+        
+        if($user->site->domain){
+            $umblerApi = new Umbler;
+            $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
+            $umblerApi->setDomain($user->site->domain);
+
+            $emails = $umblerApi->getEmailAccounts();
+        }else{
+            $emails = [];
+        }
 
         return response()->json([
+            'status' => $user->site->emails,
             'emails' => $emails
         ]);
     }
@@ -38,9 +40,15 @@ class EmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function plan()
+    public function plan(Request $request)
     {
-        $plans = $this->umblerApi->getAvailableEmailPlans();
+        $user = User::where('token', $request->token)->with('site')->first();
+
+        $umblerApi = new Umbler;
+        $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
+        $umblerApi->setDomain($user->site->domain);
+
+        $plans = $umblerApi->getAvailableEmailPlans();
 
         return response()->json(['plans' => $plans]);
     }
@@ -62,7 +70,13 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        $email = $this->umblerApi->createEmailAccount([
+        $user = User::where('token', $request->token)->with('site')->first();
+
+        $umblerApi = new Umbler;
+        $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
+        $umblerApi->setDomain($user->site->domain);
+
+        $email = $umblerApi->createEmailAccount([
             "emailAccount" => $request->email,
             "fullName" => $request->name,
             "password" => $request->password,
@@ -78,9 +92,15 @@ class EmailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($email)
+    public function show(Request $request, $email)
     {
-        $email = $this->umblerApi->getEmailAccount($email);
+        $user = User::where('token', $request->token)->with('site')->first();
+
+        $umblerApi = new Umbler;
+        $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
+        $umblerApi->setDomain($user->site->domain);
+
+        $email = $umblerApi->getEmailAccount($email);
 
         return response()->json($email);
     }
@@ -105,7 +125,13 @@ class EmailController extends Controller
      */
     public function update(Request $request, $email)
     {
-        $email = $this->umblerApi->updateEmailAccount($email, [
+        $user = User::where('token', $request->token)->with('site')->first();
+
+        $umblerApi = new Umbler;
+        $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
+        $umblerApi->setDomain($user->site->domain);
+
+        $email = $umblerApi->updateEmailAccount($email, [
             "id" => $request->id,
             "fullName" => $request->name,
             "password" => $request->password,
@@ -121,9 +147,15 @@ class EmailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($email)
+    public function destroy(Request $request, $email)
     {
-        $response = $this->umblerApi->deleteEmailAccount($email);
+        $user = User::where('token', $request->token)->with('site')->first();
+
+        $umblerApi = new Umbler;
+        $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
+        $umblerApi->setDomain($user->site->domain);
+
+        $response = $umblerApi->deleteEmailAccount($email);
         return response()->json(['email' => $response]);
     }
 
