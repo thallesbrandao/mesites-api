@@ -11,15 +11,12 @@ class TemplatesController extends Controller
 {
     public function index($token)
     {
-        $generator = new \PHPTokenGenerator\TokenGenerator();
         $templates = Templates::get();
 
         $user = User::where('token', $token)->with('site')->first();
 
-        $hash = $generator->generate(30);
-
         $user->site()->update([
-            'hash' =>  $hash
+            'ftp' => $user->site->ftp
         ]);
 
         foreach ($templates as $key => $template) {
