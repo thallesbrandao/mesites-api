@@ -20,6 +20,7 @@ class Sites extends Model
         'config_name',
         'config_email',
         'config_description',
+        'hash',
     ];
     
 }

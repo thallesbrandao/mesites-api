@@ -28,6 +28,7 @@ class CreateSitesTable extends Migration
             $table->string('config_name')->nullable();
             $table->string('config_email')->nullable();
             $table->text('config_description')->nullable();
+            $table->string('hash')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
