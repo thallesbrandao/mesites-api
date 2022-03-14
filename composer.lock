@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5d567c15376d2593f638c0e030f11bc",
+    "content-hash": "ef216f455ac5ce8a43fe134188483a84",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5780,21 +5780,22 @@
         },
         {
             "name": "thallesbrandao/umbler",
-            "version": "1.0.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "git@github.com:thallesbrandao/umbler.git",
-                "reference": "99f46b196e50a5ad4329831233d6d1470cdc8972"
+                "reference": "64de27593c1e0d0dc0e80c0bc3b616b7bab43eeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thallesbrandao/umbler/zipball/99f46b196e50a5ad4329831233d6d1470cdc8972",
-                "reference": "99f46b196e50a5ad4329831233d6d1470cdc8972",
+                "url": "https://api.github.com/repos/thallesbrandao/umbler/zipball/64de27593c1e0d0dc0e80c0bc3b616b7bab43eeb",
+                "reference": "64de27593c1e0d0dc0e80c0bc3b616b7bab43eeb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -5814,10 +5815,10 @@
             ],
             "description": "Integração com a API do Umbler",
             "support": {
-                "source": "https://github.com/thallesbrandao/umbler/tree/1.0",
+                "source": "https://github.com/thallesbrandao/umbler/tree/1.1",
                 "issues": "https://github.com/thallesbrandao/umbler/issues"
             },
-            "time": "2021-12-01T21:25:28+00:00"
+            "time": "2022-02-10T17:47:16+00:00"
         },
         {
             "name": "tightenco/ziggy",
@@ -8655,7 +8656,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "thallesbrandao/umbler": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

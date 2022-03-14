@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Sites::class, 'user_id');
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Projects::class, 'user_id');
+    }
 }

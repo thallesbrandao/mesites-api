@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EmailController;
+use App\Http\Controllers\Api\ProjectsController;
 use App\Http\Controllers\Api\SitesController;
 use App\Http\Controllers\Api\TemplatesController;
 use App\Http\Controllers\Api\UserController;
@@ -25,7 +26,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::get('emails/{token}/plans', [EmailController::class, 'plan'])->name('email.plans');
     Route::get('templates/{token}', [TemplatesController::class, 'index'])->name('templates');
-    Route::put('templates/{token}', [TemplatesController::class, 'update'])->name('templates.update');
 
     Route::get('emails/{token}/{email}', [EmailController::class, 'show'])->name('email.show');
     Route::get('emails/{token}', [EmailController::class, 'index'])->name('email.index');
@@ -35,4 +35,8 @@ Route::prefix('v1')->group(function () {
 
     Route::resource('sites', SitesController::class);
     Route::resource('user', UserController::class);
+
+    Route::get('dominio/{domain}', [SitesController::class, 'domain'])->name('domain.show');
+
+    Route::resource('projetos/{token}', ProjectsController::class);
 });
