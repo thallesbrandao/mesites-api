@@ -72,8 +72,14 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $user = User::where('token', $request->token)->first();
+
+        $project = Projects::where('id', $request->id)->where('user_id', $user->id)->firstOrFail();
+
+        $project->delete();
+
+        return response()->json(['project' => $project]);
     }
 }

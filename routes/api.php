@@ -38,5 +38,9 @@ Route::prefix('v1')->group(function () {
 
     Route::get('dominio/{domain}', [SitesController::class, 'domain'])->name('domain.show');
 
-    Route::resource('projetos/{token}', ProjectsController::class);
+
+    Route::get('projetos/{token}', [ProjectsController::class, 'index'])->name('projetos.index');
+    Route::put('projetos/{token}/editar/{id}', [ProjectsController::class, 'update'])->name('projetos.update');
+    Route::delete('projetos/{token}/deletar/{id}', [ProjectsController::class, 'destroy'])->name('projetos.destroy');
+
 });
