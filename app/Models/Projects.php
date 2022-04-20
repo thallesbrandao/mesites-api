@@ -11,6 +11,8 @@ class Projects extends Model
 
     protected $appends = ['url'];
 
+    protected $fillable = ['user_id', 'name', 'config_logo', 'config_name', 'config_email', 'config_description'];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
