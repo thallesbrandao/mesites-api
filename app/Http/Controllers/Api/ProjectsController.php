@@ -55,9 +55,9 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $project = Projects::where('id', $id)->firstOrFail();
+        $project = Projects::where('id', $request->project)->firstOrFail();
         $project->name = $request->name;
         $project->save();
 
