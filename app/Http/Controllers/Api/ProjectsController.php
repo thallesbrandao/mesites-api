@@ -76,7 +76,7 @@ class ProjectsController extends Controller
     {
         $user = User::where('token', $request->token)->first();
 
-        $project = Projects::where('id', $request->id)->where('user_id', $user->id)->firstOrFail();
+        $project = Projects::where('id', $request->project)->where('user_id', $user->id)->firstOrFail();
 
         $project->delete();
 

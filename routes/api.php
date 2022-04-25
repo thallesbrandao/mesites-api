@@ -41,6 +41,6 @@ Route::prefix('v1')->group(function () {
 
     Route::get('projetos/{token}', [ProjectsController::class, 'index'])->name('projetos.index');
     Route::put('projetos/{token}/editar/{project}', [ProjectsController::class, 'update'])->name('projetos.update');
-    Route::delete('projetos/{token}/deletar/{id}', [ProjectsController::class, 'destroy'])->name('projetos.destroy');
+    Route::delete('projetos/{token}/deletar/{project}', [ProjectsController::class, 'destroy'])->name('projetos.destroy');
 
 });
