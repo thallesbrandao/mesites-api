@@ -43,7 +43,6 @@ class ProjectsController extends Controller
         ]);
 
         return response()->json([
-            'project' => $project,
             'url' => 'https://builder.meeventos.com.br/?token=' . $user->token . '&edit=' . $project->id,
         ]);
     }
