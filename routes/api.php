@@ -38,7 +38,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('dominio/{domain}', [SitesController::class, 'domain'])->name('domain.show');
 
-
+    Route::get('projeto/{token}/{project}', [ProjectsController::class, 'show'])->name('projetos.show');
     Route::get('projetos/{token}', [ProjectsController::class, 'index'])->name('projetos.index');
     Route::post('projetos/{token}', [ProjectsController::class, 'store'])->name('projetos.store');
     Route::put('projetos/{token}/editar/{project}', [ProjectsController::class, 'update'])->name('projetos.update');

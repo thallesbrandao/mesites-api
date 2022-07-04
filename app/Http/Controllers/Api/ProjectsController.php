@@ -48,6 +48,21 @@ class ProjectsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        $user = User::where('token', $request->token)->first();
+        
+        $project = Projects::where('id', $request->project)->where('user_id', $user->id)->firstOrFail();
+
+        return response()->json(['project' => $project]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
