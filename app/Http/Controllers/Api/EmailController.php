@@ -18,14 +18,14 @@ class EmailController extends Controller
     public function index(Request $request)
     {
         $user = User::where('token', $request->token)->with('site')->first();
-        
-        if($user->site->domain){
+
+        if (isset($user->site->domain)) {
             $umblerApi = new Umbler;
             $umblerApi->setCredentials('61b911c37b3b5018ecb3d3df', '9f8fac50b5f04566a3fb314f6def8a29');
             $umblerApi->setDomain($user->site->domain);
 
             $emails = $umblerApi->getEmailAccounts();
-        }else{
+        } else {
             $emails = [];
         }
 
@@ -164,9 +164,9 @@ class EmailController extends Controller
     {
         if (isset($array['EmailAccount'])) {
             return ['status' => false, 'msg' => 'Email inválido, ajuste e tente novamente!'];
-        } elseif (isset($array['errors']) and isset($array['errors']['Password']) and $array['errors']['Password'][0] == 'EmailAccountPasswordLength' OR isset($array['Password'])) {
+        } elseif (isset($array['errors']) and isset($array['errors']['Password']) and $array['errors']['Password'][0] == 'EmailAccountPasswordLength' or isset($array['Password'])) {
             return ['status' => false, 'msg' => 'Senha muito pequena, ajuste e tente novamente!'];
-        } elseif (isset($array['errors']) and isset($array['errors']['FullName']) and $array['errors']['FullName'][0] == 'EmailAccountFullNameLength' OR isset($array['FullName'])) {
+        } elseif (isset($array['errors']) and isset($array['errors']['FullName']) and $array['errors']['FullName'][0] == 'EmailAccountFullNameLength' or isset($array['FullName'])) {
             return ['status' => false, 'msg' => 'Nome muito pequeno, ajuste e tente novamente!'];
         } elseif (isset($array['errors']) and isset($array['errors']['Password']) and $array['errors']['Password'][0] == 'EmailAccountPasswordLetter') {
             return ['status' => false, 'msg' => 'Senha deve ter ao menos 1 letra, ajuste e tente novamente!'];
