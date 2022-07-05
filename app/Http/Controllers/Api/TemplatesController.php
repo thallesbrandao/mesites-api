@@ -15,7 +15,7 @@ class TemplatesController extends Controller
 
         $user = User::where('token', $token)->with('site')->first();
 
-        $user->site()->update([
+        $user->site()->updateOrCreate([
             'ftp' => $user->site->ftp
         ]);
 
