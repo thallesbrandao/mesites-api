@@ -31,7 +31,7 @@ class TemplatesController extends Controller
         } elseif (!empty($user->site->preview) and !empty($user->site->ftp)) {
             $templates->prepend(['id' => 0, 'name' => 'Site ativo', 'thumbnail' => "//image.thum.io/get/auth/54404-imgindex/width/350/noanimate/viewportWidth/1650/{$user->site->http}{$user->site->domain}/?preview={$user->site->preview}", 'edit' => "//builder.meeventos.com.br/?token={$user->token}&template=0"]);
         } else {
-            $templates->prepend(['id' => 0, 'name' => 'Site em branco', 'thumbnail' => url('/images/sem-layout.jpg'), 'edit' => "//builder.meeventos.com.br/?token={$user->token}"]);
+            $templates->prepend(['id' => 0, 'name' => 'Site em branco', 'thumbnail' => url('/images/sem-layout.jpg'), 'edit' => "//builder.meeventos.com.br/?token={$user->token}&create=project"]);
         }
 
         return response()->json([
