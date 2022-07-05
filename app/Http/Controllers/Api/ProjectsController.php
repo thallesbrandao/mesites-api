@@ -43,6 +43,7 @@ class ProjectsController extends Controller
         ]);
 
         return response()->json([
+            'project_id' => $project->id,
             'url' => 'https://builder.meeventos.com.br/?token=' . $user->token . '&edit=' . $project->id . '&template=' . $request->template,
         ]);
     }
@@ -56,7 +57,7 @@ class ProjectsController extends Controller
     public function show(Request $request)
     {
         $user = User::where('token', $request->token)->first();
-        
+
         $project = Projects::where('id', $request->project)->where('user_id', $user->id)->firstOrFail();
 
         return response()->json(['project' => $project]);
