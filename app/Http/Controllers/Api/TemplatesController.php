@@ -15,9 +15,9 @@ class TemplatesController extends Controller
 
         $user = User::where('token', $token)->with('site')->first();
 
-        $user->site()->update([
-            'ftp' => $user->site->ftp
-        ]);
+        // $user->site()->update([
+        //     'ftp' => $user->site->ftp
+        // ]);
 
         foreach ($templates as $key => $template) {
             $templates[$key]->thumbnail = "//builder.meeventos.com.br/templates/{$template['id']}/thumbnail.png";
