@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Projects;
+use App\Models\Sites;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -90,6 +91,10 @@ class ProjectsController extends Controller
     public function destroy(Request $request)
     {
         $user = User::where('token', $request->token)->first();
+
+        $site = Sites::where('user_id', $user->id)->firstOrFail();
+        $site->project_id = null;
+        $site->save();
 
         $project = Projects::where('id', $request->project)->where('user_id', $user->id)->firstOrFail();
 
